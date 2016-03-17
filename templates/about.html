@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block navbar %}
+<ul class="nav navbar-nav">
+    <li class=""><a href="{{ url_for('index') }}">Home</a></li>
+    <li class=""><a href="{{ url_for('summary') }}">Summary</a></li>
+    <li class=""><a href="{{ url_for('details') }}">Details</a></li>
+</ul>
+<div class="navbar-text">|</div>
+{% if current_user.is_authenticated %}
+    <div class="navbar-text">Hello, {{ current_user.full_name }} (<a style="font-size:85%" href="{{ url_for('logout') }}">Log out</a>)</div>
+{% else %}
+    <div class="navbar-text"><a style="font-size:85%" href="{{ url_for('oauth_authorize', provider='fitbit') }}">Sign in with Fitbit</a></div>
+{% endif %}
+
+<ul class="nav navbar-nav navbar-right">
+    <li class="active"><a href="{{ url_for('about') }}">About <span class="sr-only">(current)</span></a></li>
+</ul>
+{% endblock %}
+
+{% block main %}
+            <div class="about">
+                <h2>About</h2>
+                <p>This is a demo app that showcases displaying Fitbit data.</p>
+
+                <h3>Features:</h3>
+                <ul>
+                    <li>Login using Fitbit account via OAuth 2.0</li>
+                    <li>Show daily summaries for the last 30 days</li>
+                    <li>Show statistics?</li>
+                </ul>
+            </div>
+{% endblock %}
