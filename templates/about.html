@@ -2,8 +2,8 @@
 {% block navbar %}
 <ul class="nav navbar-nav">
     <li class=""><a href="{{ url_for('index') }}">Home</a></li>
-    <li class=""><a href="{{ url_for('summary') }}">Summary</a></li>
-    <li class=""><a href="{{ url_for('details') }}">Details</a></li>
+    <li class=""><a href="{{ url_for('show_summary') }}">Summary</a></li>
+    <li class=""><a href="{{ url_for('show_details') }}">Details</a></li>
 </ul>
 <div class="navbar-text">|</div>
 {% if current_user.is_authenticated %}
@@ -25,8 +25,26 @@
                 <h3>Features:</h3>
                 <ul>
                     <li>Login using Fitbit account via OAuth 2.0</li>
-                    <li>Show daily summaries for the last 30 days</li>
-                    <li>Show statistics?</li>
+                    <li>Show daily steps and calorie summaries for the last 7 days</li>
+                    <li>Show daily steps and calorie summaries for the last 30 days</li>
+                </ul>
+
+                <h3>Under the Hood:</h3>
+                <ul>
+                    <li>Python backend using Flask</li>
+                    <li>Bootstrap frontend</li>
+                    <li>D3 visualization</li>
+                    <li>Functionality to make all Fitbit API calls</li>
+                </ul>
+
+                <h3>Credits:</h3>
+                <ul>
+                    <li>rauth: <a href="https://rauth.readthedocs.org">https://rauth.readthedocs.org</a> </li>
+                    <li>OAuth 2.0 tutorial: <a href="http://blog.miguelgrinberg.com/post/oauth-authentication-with-flask">http://blog.miguelgrinberg.com/post/oauth-authentication-with-flask</a></li>
+                    <li>Flask: <a href="http://flask.pocoo.org/">http://flask.pocoo.org/</a></li>
+                    <li>Bootstrap: <a href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
+                    <li>D3: <a href="https://d3js.org">https://d3js.org</a> </li>
+                    <li>Python class that wraps Fitbit API calls is adjusted based on this project: <a href="https://github.com/orcasgit/python-fitbit">https://github.com/orcasgit/python-fitbit</a></li>
                 </ul>
             </div>
 {% endblock %}
