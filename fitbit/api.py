@@ -220,7 +220,7 @@ class Fitbit(object):
                     self._collection_resource, resource))
 
         for qualifier in Fitbit.QUALIFIERS:
-            setattr(self, '%s_activities' % qualifier, curry(self._get_activity_stats, qualifier=qualifier))
+            setattr(self, 'get_%s_activities' % qualifier, curry(self._get_activity_stats, qualifier=qualifier))
             # setattr(self, '%s_foods' % qualifier, curry(self._food_stats, qualifier=qualifier))
 
     def make_request(self, *args, **kwargs):

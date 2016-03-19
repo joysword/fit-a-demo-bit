@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template, redirect, flash, session, request, g
+from flask import Flask, url_for, render_template, redirect, flash, session, request, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 
@@ -48,12 +48,23 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/summary')
-def show_summary():
+@app.route('/get_time_series')
+def get_time_series():
     fitbit = Fitbit(app.config['OAUTH_CREDENTIALS']['fitbit']['id'],
                     app.config['OAUTH_CREDENTIALS']['fitbit']['secret'],
                     access_token=session['token']['access_token'],
                     refresh_token=session['token']['refresh_token'])
+    steps_week = fitbit.get_time_series(resource='activities/steps', period='7d')
+    calories_week = fitbit.get_time_series(resource='activities/calories', period='7d')
+    steps_month = fitbit.get_time_series(resource='activities/steps', period='30d')
+    calories_month = fitbit.get_time_series(resource='activities/calories', period='30d')
+    # recent = fitbit.get_recent_activities()
+    return jsonify(steps_week=steps_week, calories_week=calories_week,
+                   steps_month=steps_month, calories_month=calories_month)
+
+
+@app.route('/summary')
+def show_summary():
     return render_template('summary.html')
 
 
